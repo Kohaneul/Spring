@@ -15,6 +15,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
+    //팩토리 빈(AppConfig)를 통해서 등록하는 방법
+
+    //AppConfig가 제공하는 메서드 1 : memberService
     @Bean
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
