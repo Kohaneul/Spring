@@ -4,6 +4,7 @@ import haneul.haneulspring.AppConfig;
 import haneul.haneulspring.member.MemberRepository;
 import haneul.haneulspring.member.MemberService;
 import haneul.haneulspring.member.MemberServiceImpl;
+import haneul.haneulspring.member.MemoryMemberRepository;
 import haneul.haneulspring.order.OrderService;
 import haneul.haneulspring.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class ConfigurationSingletonTest {
     @Test
     void configurationTest(){
+
+
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
         OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
@@ -24,11 +27,16 @@ public class ConfigurationSingletonTest {
         System.out.println("orderService->MemberRepository : "+memberRepository2);
         System.out.println("memberRepository : "+memberRepository);
         Assertions.assertThat(memberRepository1).isSameAs(memberRepository2).isSameAs(memberRepository);
+
+
+
     }
 
 
     @Test
     void configurationDeep(){
+
+
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         AppConfig bean = ac.getBean(AppConfig.class);
         System.out.println("bean = "+bean.getClass());
