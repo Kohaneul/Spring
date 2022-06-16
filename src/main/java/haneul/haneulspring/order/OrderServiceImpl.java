@@ -7,15 +7,33 @@ import haneul.haneulspring.member.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/*IoC 컨테이너의 등록방식
+    1. Component 를 통한 컨테이너 등록
+    2. Autowired 을 통한 의존관계 주입
+            의존관계 주입방식 : setter주입(선택적, 변경가능할때) , 생성자 주입(불변)
+
+*/
 @Component
 public class OrderServiceImpl implements OrderService{
     private final MemberRepository repository;
     private final DiscountPolicy discountPolicy;//인터페이스에만 의존하는 중
+
+
     @Autowired
+    //  생성자가 딱 하나만 있으면 Autowired가 생략해도 된다 => 자동으로 의존관계 주입
     public OrderServiceImpl(MemberRepository repository, DiscountPolicy discountPolicy) {
         this.repository = repository;
         this.discountPolicy = discountPolicy;
     }
+
+//    메서드 주입 (보통 생성자 주입에서 대부분 해결하므로 거의 사용하지 않는다)
+//    @Autowired
+//    public void init(MemberRepository repository, DiscountPolicy discountPolicy){
+//        this.repository= repository;
+//        this.discountPolicy = discountPolicy;
+//    }
+    //
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {

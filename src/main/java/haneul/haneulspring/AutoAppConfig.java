@@ -1,7 +1,11 @@
 package haneul.haneulspring;
 
+import haneul.haneulspring.discount.DiscountPolicy;
 import haneul.haneulspring.member.MemberRepository;
 import haneul.haneulspring.member.MemoryMemberRepository;
+import haneul.haneulspring.order.OrderService;
+import haneul.haneulspring.order.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +20,11 @@ import org.springframework.stereotype.Component;
             //만약 basepackage를 지정 안한다면? AutoAppConfig가 속한 모든 패키지를 다 조회함.
 )
 public class AutoAppConfig{
-
+//
+//    @Bean
+//        OrderService orderService(){
+//        return new OrderServiceImpl();
+//    }
     @Bean(name="memoryMemberRepository")
         MemberRepository memberRepository(){
         return new MemoryMemberRepository();
