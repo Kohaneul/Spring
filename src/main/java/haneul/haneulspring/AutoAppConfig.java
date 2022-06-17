@@ -25,10 +25,10 @@ public class AutoAppConfig{
 //        OrderService orderService(){
 //        return new OrderServiceImpl();
 //    }
-    @Bean(name="memoryMemberRepository")
-        MemberRepository memberRepository(){
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name="memoryMemberRepository")
+//        MemberRepository memberRepository(){
+//        return new MemoryMemberRepository();
+//    }
     /*  이 경우 수동으로 등록한 @Bean이름 : memoryMemberRepository와 Component를 이용해
         자동 등록된 MemoryMemberRepository(bean 이름 : memoryMemberRepository)와 이름이 충돌하게 된다.
         하지만 수동 Bean이 우선권을 가지게 되며 자동 Bean을 오버라이딩 해준다.

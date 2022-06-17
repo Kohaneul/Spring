@@ -24,6 +24,10 @@ public class OrderServiceTest {
 
         Assertions.assertThat(o.getMemberId()).isEqualTo(memberA.getId());
     }
+
+
+
+
 //
 //    @Test
 //    void fieldInjectionTest(){

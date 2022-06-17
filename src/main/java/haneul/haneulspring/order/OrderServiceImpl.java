@@ -15,16 +15,34 @@ import org.springframework.stereotype.Component;
 */
 @Component
 public class OrderServiceImpl implements OrderService{
-    private final MemberRepository repository;
+    //생성자주입 : 불변, 누락을 막을 수 있다.
+    private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;//인터페이스에만 의존하는 중
-
-
     @Autowired
-    //  생성자가 딱 하나만 있으면 Autowired가 생략해도 된다 => 자동으로 의존관계 주입
-    public OrderServiceImpl(MemberRepository repository, DiscountPolicy discountPolicy) {
-        this.repository = repository;
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    //
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        this.discountPolicy = discountPolicy;
+//    }
+
+
+//
+//    @Autowired
+//    //  생성자가 딱 하나만 있으면 Autowired가 생략해도 된다 => 자동으로 의존관계 주입
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
 //    메서드 주입 (보통 생성자 주입에서 대부분 해결하므로 거의 사용하지 않는다)
 //    @Autowired
@@ -37,12 +55,12 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
-        Member member = repository.findById(memberId);
+        Member member = memberRepository.findById(memberId);
         int discountPrice = discountPolicy.discount(member,itemPrice);//최종적으로 할인가격 받음
 
         return new Order(memberId,itemName,itemPrice,discountPrice);
     }
     public MemberRepository getMemberRepository(){
-        return repository;
+        return memberRepository;
     }
 }
