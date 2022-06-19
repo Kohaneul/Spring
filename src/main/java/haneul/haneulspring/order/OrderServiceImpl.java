@@ -4,7 +4,9 @@ import haneul.haneulspring.discount.DiscountPolicy;
 import haneul.haneulspring.discount.FixDiscountPolicy;
 import haneul.haneulspring.discount.RateDiscountPolicy;
 import haneul.haneulspring.member.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /*IoC 컨테이너의 등록방식
@@ -14,16 +16,20 @@ import org.springframework.stereotype.Component;
 
 */
 @Component
+ // final 생성자를 자동으로 생성해줌
 public class OrderServiceImpl implements OrderService{
     //생성자주입 : 불변, 누락을 막을 수 있다.
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;//인터페이스에만 의존하는 중
+
+
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
 
+    // @Qualifier : 추가 구분자 bean이 두개일때 설정해둔 이름으로 찾음
     //
 //    @Autowired
 //    public void setMemberRepository(MemberRepository memberRepository) {
