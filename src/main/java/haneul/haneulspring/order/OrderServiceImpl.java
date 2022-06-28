@@ -1,5 +1,6 @@
 package haneul.haneulspring.order;
 
+import haneul.haneulspring.annotation.MainDiscountPolicy;
 import haneul.haneulspring.discount.DiscountPolicy;
 import haneul.haneulspring.discount.FixDiscountPolicy;
 import haneul.haneulspring.discount.RateDiscountPolicy;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository,@MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
