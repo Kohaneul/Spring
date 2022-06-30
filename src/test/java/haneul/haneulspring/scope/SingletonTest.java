@@ -28,5 +28,6 @@ public class SingletonTest {
         public void destroy(){
             System.out.println("Singleton.Destroy");
         }
+
     }
 }
